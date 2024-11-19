@@ -1,0 +1,14 @@
+options {
+    directory "/var/cache/bind";
+
+    // Allow queries from any network
+    allow-query { any; };
+
+    // Forward unresolved queries to public DNS servers
+    forwarders {
+        8.8.8.8; // Google DNS
+        1.1.1.1; // Cloudflare DNS
+    };
+
+    dnssec-validation auto;
+};

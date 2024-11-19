@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  dns-server:
+    build: .
+    container_name: dns-server
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    cap_add:
+      - NET_BIND_SERVICE
+    volumes:
+      - ./named.conf.local:/etc/bind/named.conf.local
+      - ./named.conf.options:/etc/bind/named.conf.options
+      - ./db.collabapp.com:/etc/bind/zones/db.collabapp.com
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Kolkata
